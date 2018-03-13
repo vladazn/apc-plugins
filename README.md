@@ -1,2 +1,2 @@
 # apc-plugins
-Shopware Plugons
+Shopware Plugins
