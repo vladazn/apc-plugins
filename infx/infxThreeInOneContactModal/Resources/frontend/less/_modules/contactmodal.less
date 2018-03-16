@@ -1,0 +1,108 @@
+.min-help-info{
+    position: fixed;
+    bottom: 0;
+    right: 100px;
+    z-index: 999999;
+    padding: 10px;
+    font-weight: 600;
+    border-radius: 5px 5px 0 0;
+    color: #222;
+    background: #f3f3f3;
+    box-shadow: 0 0 3px 0 #999;
+    cursor: pointer;
+    .icons-section{
+        display: inline-block;
+        .all-sytle{
+            display: inline-block;
+            font-size: 18px;
+            color: @brand-secondary;
+            margin: 0 4px;
+            &.question{
+                font-weight: bold;
+            }
+        }
+    }
+    .text-section{
+        display: inline-block;
+        font-size: 15px;
+        font-weight: bold;
+    }
+}
+
+.help-info-container{
+    position: fixed;
+    bottom: 0;
+    right: 100px;
+    z-index: 999999;
+    padding: 10px;
+    font-weight: 600;
+    border-radius: 5px 5px 0 0;
+    color: #222;
+    background: #f3f3f3;
+    box-shadow: 0 0 3px 0 #999;
+    .help-info-text{
+        margin-bottom: 5px;
+        .close-btn-circle{
+            float: right;
+            .icon--cross3{
+                font-size: 16px;
+                cursor: pointer;
+                &:hover{
+                    color: @brand-secondary;
+                }
+            }
+        }
+    }
+    .help-info-properties{
+        display: flex;
+        flex-wrap: wrap;
+        .prop-container{
+            margin: 0 10px;
+        }
+        .section-style{
+            margin-bottom: 3px;
+        }
+        .chat-property{
+            .chat-section{
+                .prop-style{
+                    &.infx--chat-offline{
+                        color: #DD0000;
+                    }
+                    &.infx--chat-online{
+                        color: #76b51b;
+                    }
+                }
+            }
+            .contact-link{
+                .link-style{
+                    cursor: pointer;
+                    &:hover{
+                        color: @brand-secondary;
+                    }
+                }
+            }
+        }
+        .number-property{
+            .phone-number{
+                display: block;
+                .fa-phone{
+                    color: @brand-secondary;
+                }
+            }
+        }
+        .questions-property{
+            .questions-text{
+                display: block;
+                color: @brand-secondary;
+                .ques-text{
+                    color: #222;
+                }
+            }
+            .questions-link{
+                &:hover{
+                    color: @brand-secondary;
+                }
+            }
+        }
+    }
+}
