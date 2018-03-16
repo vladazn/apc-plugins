@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.3/engine/Shopware/Components/Plugin/schema/config.xsd">
+    <elements>
+        <element required="true" type="text" scope='shop'>
+            <name>api_key</name>
+            <label lang="de">API-Zugriffsschlüssel</label>
+            <label lang="en">API access key</label>
+        </element>
+        <element required="true" type="text" scope='shop'>
+            <name>originator</name>
+            <label lang="de">Absender</label>
+            <label lang="en">Sender</label>
+        </element>
+        <element required="true" type="textarea" scope='shop'>
+            <name>message_text</name>
+            <label lang="de">Text</label>
+            <label lang="en">Text</label>
+            <value>Your serials: [[serials]]</value>
+            <description lang="de">Place "[[serials]]" in a text, where you want your serial codes to be displayed.</description>
+            <description lang="en">Place "[[serials]]" in a text, where you want your serial codes to be displayed.</description>
+        </element>
+    </elements>
+</config>
