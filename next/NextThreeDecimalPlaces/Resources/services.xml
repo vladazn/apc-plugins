@@ -1,0 +1,19 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="next_three_decimal_places.subscriber.templates" class="NextThreeDecimalPlaces\Subscriber\ExtendArticle">
+            <argument>%next_three_decimal_places.plugin_dir%</argument>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+        <service id="next_three_decimal_places.subscriber.basket_subscriber" class="NextThreeDecimalPlaces\Subscriber\BasketSubscriber">
+            <argument>%next_three_decimal_places.plugin_dir%</argument>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+        <service id="next_three_decimal_places.subscriber.decimal_subscriber" class="NextThreeDecimalPlaces\Subscriber\DecimalSubscriber">
+            <argument>%next_three_decimal_places.plugin_dir%</argument>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+    </services>
+</container>

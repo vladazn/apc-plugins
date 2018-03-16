@@ -1,0 +1,22 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Add emotion component auto loader -->
+        <service id="cc_teaser_element.emotion_view_subscriber" class="Shopware\Components\Emotion\EmotionComponentViewSubscriber">
+            <argument>%cc_teaser_element.plugin_dir%</argument>
+            <tag name="shopware.event_subscriber" />
+        </service>
+
+        <!-- Add TemplateRegistration subscriber-->
+        <service id="cc_teaser_element.subscriber.templates" class="CcTeaserElement\Subscriber\TemplateRegistration">
+            <argument>%cc_teaser_element.plugin_dir%</argument>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+        <!-- emotion component handler -->
+        <service id="cc_teaser_element.emotion_component_handler" class="CcTeaserElement\ComponentHandler\TeaserComponentHandler">
+            <tag name="shopware_emotion.component_handler"/>
+        </service>
+    </services>
+</container>

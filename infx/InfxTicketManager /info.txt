@@ -1,0 +1,19 @@
+infxTicketManager ist aktuell das einzige Plugin dergleichen im Store, welches diesen Mehrwert bietet.
+Mit TicketManager können Sie jedes Produkt als Ticket markieren und somit als virtuelles Produkt verkaufen. 
+
+Sobald der Kunde seine Bestellung bezahlt hat, werden ihm die in der Bestellung enthaltenen Tickets als PDF Datei per Email zugesandt.
+
+Sowohl das Email- als auch Ticket-Template kann routiniert als Shopware Template angepasst werden.
+
+Das Ticket enthält u.a. einen einmaligen Ticketcode sowie einen QR-Code um das Ticket zu identifizieren.
+Die Länge des Ticketcodes kann im Backend eingestellt werden.
+
+Des Weiteren erhalten Sie einen neuen Menüeintrag für dieses Plugin, welches Ihnen eine übersichtliche Tabelle aller bisher verkauften Tickets und dessen Details anzeigt. Hierüber können Sie das Ticket auch manuell anzeigen bzw. herunterladen und auch erneut an den Kunden versenden.
+
+Der Clou dieses Plugins ist, dass Sie jedes verkaufte Ticket (auch bei mehreren gleichen Artikeln) eindeutig zuordnen können.
+
+Sie möchten Ihre verkauften Tickets mit einer Android bzw. iOS App prüfen und entwerten?
+Dann bestellen Sie gleich noch unser Plugin InfxAppConnect. Dieses bietet Ihnen eine reibungslose Anbindung unserer Apps mit unseren Plugins! Die App TicketManager erhalten Sie gratis im entsprechenden Store.
+
+Diese können Sie dazu nutzen, um beim Event vor Ort die Tickets einzuscannen und zu stempeln.
+Sie können überprüfen, ob das Ticket bereits entwertet wurde, wann dies geschah und außerdem sehen Sie den Bezahlstatus der Bestellung und bei gültigen Tickets können Sie diese direkt entwerten. Sobald alle Tickets einer Bestellung entwertet wurden, wird der Bestellstatus der entsprechenden Bestellung automatisch auf "Komplett Ausgeliefert" gesetzt.

@@ -1,0 +1,1 @@
+{extends file="parent:widgets/emotion/components/emotion_gctextandimage.tpl"}

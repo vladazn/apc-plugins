@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.3/engine/Shopware/Components/Plugin/schema/plugin.xsd">
+    <label lang="en">Blog Detail Extended</label>
+    <label lang="de">Blog Detail Extended</label>
+    <version>1.0.0</version>
+    <supplier>Commerce Care d.o.o. </supplier>
+    <support>contact@comercecare.de</support>
+    <link>https://www.commercecare.de</link>
+    <description>Extended blog detail view</description>
+    <copyright>Copyright © 2018, Commerce Care.</copyright>
+    <author>Commerce Care d.o.o.</author>
+    <compatibility minVersion="5.0.0" />
+</plugin>
