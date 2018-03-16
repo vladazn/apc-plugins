@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.3/engine/Shopware/Components/Plugin/schema/config.xsd">
+    <elements>
+        <element required="true" type="select" >
+            <name>position</name>
+            <label lang='en'>Current Price Position</label>
+            <label lang='de'>Aktuelle Preisstellung</label>
+            <store>
+                <option>
+                    <value>1</value>
+                    <label lang="de">über dem Blockpreis</label>
+                    <label lang="en">Above the blockprices</label>
+                </option>
+                <option>
+                    <value>0</value>
+                    <label lang="de">Unter den Blockpreisen</label>
+                    <label lang="en">Under the blockprices</label>
+                </option>
+            </store>
+        </element>
+    </elements>
+</config>

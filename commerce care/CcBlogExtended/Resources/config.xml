@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.3/engine/Shopware/Components/Plugin/schema/config.xsd">
+    <elements>
+       <element required="true" type="text">
+            <name>date_format</name>
+            <label lang="de">Date Format in blog page</label>
+            <label lang="en">Date Format in blog page</label>
+            <value>%B %Y</value>
+            <description lang="de">
+               <![CDATA[
+                %a - abgekürzter Name des Wochentages, abhängig von der gesetzten Umgebung <br>
+                %A - ausgeschriebener Name des Wochentages, abhängig von der gesetzten Umgebung <br>
+                %B - ausgeschriebener Name des Monats, abhängig von der gesetzten Umgebung<br>
+                %c - Wiedergabewerte für Datum und Zeit, abhängig von der gesetzten Umgebung<br>
+                %C - Jahrhundert (Jahr geteilt durch 100, gekürzt auf Integer, Wertebereich 00 bis 99)<br>
+                %d - Tag des Monats als Zahl (Bereich 00 bis 31)<br>
+                %D - so wie %m/%d/%y<br>
+                %e - Tag des Monats als Dezimal-Wert, einstelligen Werten wird ein Leerzeichen voran gestellt (Wertebereich Ž 0Ž bis Ž31Ž)<br>
+                %g - wie %G, aber ohne Jahrhundert.<br>
+                %G - Das vierstellige Jahr entsprechend der ISO Wochennummer (siehe %V). Das gleiche Format und der gleiche Wert wie bei %Y. Besonderheit: entspricht die ISO Wochennummer dem vorhergehenden oder folgenden Jahr, wird dieses Jahr verwendet.<br>
+                %h - so wie %b<br>
+                %H - Stunde als Zahl im 24-Stunden-Format (Bereich 00 bis 23)<br>
+                %I - Stunde als Zahl im 12-Stunden-Format (Bereich 01 bis 12)<br>
+                %j - Tag des Jahres als Zahl (Bereich 001 bis 366)<br>
+                %m - Monat als Zahl (Bereich 01 bis 12)<br>
+                %M - Minute als Dezimal-Wert<br>
+                %n - neue Zeile<br>
+                %p - entweder `am' oder `pm' (abhängig von der gesetzten Umgebung) oder die entsprechenden Zeichenketten der gesetzten Umgebung<br>
+                %r - Zeit im Format a.m. oder p.m.<br>
+                %R - Zeit in der 24-Stunden-Formatierung<br>
+                %S - Sekunden als Dezimal-Wert<br>
+                %t - Tabulator<br>
+                %T - aktuelle Zeit, genau wie %H:%M:%S<br>
+                %u - Tag der Woche als Dezimal-Wert [1,7], dabei ist 1 der Montag.<br>
+                %U - Nummer der Woche des aktuellen Jahres als Dezimal-Wert, beginnend mit dem ersten Sonntag als erstem Tag der ersten Woche.<br>
+                %V - Kalenderwoche (nach ISO 8601:1988) des aktuellen Jahres. Als Dezimal-Zahl mit dem Wertebereich 01 bis 53, wobei die Woche 01 die erste Woche mit mindestens 4 Tagen im aktuellen Jahr ist. Die Woche beginnt montags (nicht sonntags). (Benutzen Sie %G or %g für die Jahreskomponente, die der Wochennummer für den gegebenen Timestamp entspricht.)<br>
+                %w - Wochentag als Dezimal-Wert, Sonntag ist 0<br>
+                %W - Nummer der Woche des aktuellen Jahres, beginnend mit dem ersten Montag als erstem Tag der ersten Woche.<br>
+                %x - bevorzugte Datumswiedergabe (ohne Zeit), abhängig von der gesetzten Umgebung.<br>
+                %X - bevorzugte Zeitwiedergabe (ohne Datum), abhängig von der gesetzten Umgebung.<br>
+                %y - Jahr als 2-stellige-Zahl (Bereich 00 bis 99)<br>
+                %Y - Jahr als 4-stellige-Zahl inklusive des Jahrhunderts<br>
+                %Z - Zeitzone, Name oder eine Abkürzung<br>
+                    %% - ein %-Zeichen<br>
+                 ]]>
+            </description>
+            <description lang="en">
+                <![CDATA[
+                %a - abbreviated weekday name according to the current locale<br>
+                %A - full weekday name according to the current locale<br>
+                %b - abbreviated month name according to the current locale<br>
+                %B - full month name according to the current locale<br>
+                %c - preferred date and time representation for the current locale<br>
+                %C - century number (the year divided by 100 and truncated to an integer, range 00 to 99)<br>
+                %d - day of the month as a decimal number (range 01 to 31)<br>
+                %D - same as %m/%d/%y<br>
+                %e - day of the month as a decimal number, a single digit is preceded by a space (range 1 to 31)<br>
+                %g - Week-based year within century [00,99]<br>
+                %G - Week-based year, including the century [0000,9999]<br>
+                %h - same as %b<br>
+                %H - hour as a decimal number using a 24-hour clock (range 00 to 23)<br>
+                %I - hour as a decimal number using a 12-hour clock (range 01 to 12)<br>
+                %j - day of the year as a decimal number (range 001 to 366)<br>
+                %k - Hour (24-hour clock) single digits are preceded by a blank. (range 0 to 23)<br>
+                %l - hour as a decimal number using a 12-hour clock, single digits preceeded by a space (range 1 to 12)<br>
+                %m - month as a decimal number (range 01 to 12)<br>
+                %M - minute as a decimal number<br>
+                %n - newline character<br>
+                %p - either `am' or `pm' according to the given time value, or the corresponding strings for the current locale<br>
+                %r - time in a.m. and p.m. notation<br>
+                %R - time in 24 hour notation<br>
+                %S - second as a decimal number<br>
+                %t - tab character<br>
+                %T - current time, equal to %H:%M:%S<br>
+                %u - weekday as a decimal number [1,7], with 1 representing Monday<br>
+                %U - week number of the current year as a decimal number, starting with the first Sunday as the first day of the first week<br>
+                %V - The ISO 8601:1988 week number of the current year as a decimal number, range 01 to 53, where week 1 is the first week that has at least 4 days in the current year, and with Monday as the first day of the week.<br>
+                %w - day of the week as a decimal, Sunday being 0<br>
+                %W - week number of the current year as a decimal number, starting with the first Monday as the first day of the first week<br>
+                %x - preferred date representation for the current locale without the time<br>
+                %X - preferred time representation for the current locale without the date<br>
+                %y - year as a decimal number without a century (range 00 to 99)<br>
+                %Y - year as a decimal number including the century<br>
+                %Z - time zone or name or abbreviation<br>
+                %% - a literal `%' character<br>
+                %% - ein %-Zeichen<br>
+                 ]]>
+            </description>
+        </element>
+        <element type="number" scope="locale">
+            <name>blog_entries_quantity</name>
+            <label lang="de">Max Blog entries quantity in aside of blog detail page</label>
+            <label lang="en">Max Blog entries quantity in aside of blog detail page</label>
+            <value>3</value>
+        </element>
+        <element type="boolean" scope="locale">
+            <name>show_arrow_controls</name>
+            <label lang="de">Zeige die Pfeiltasten auf dem Schieberegler</label>
+            <label lang="en">Show arrow controls on slider</label>
+        </element>
+        <element type="boolean" scope="locale">
+            <name>autoslide</name>
+            <label lang="de">Autoslide Schieberegler Bilder</label>
+            <label lang="en">Autoslide slider images</label>
+            <value>true</value>
+        </element>
+        <element type="text" scope="locale">
+            <name>pdf_icon_class</name>
+            <label lang="de">"PDF-Download" Icon-Klasse</label>
+            <label lang="en">"PDF download" icon class</label>
+            <value>icon--download</value>
+        </element>
+        <element type="text" scope="locale">
+            <name>comment_icon_class</name>
+            <label lang="de">"Kommentar hinterlassen" Icon-Klasse</label>
+            <label lang="en">"Leave comment" icon class</label>
+            <value>icon--comment</value>
+        </element>
+    </elements>
+</config>
