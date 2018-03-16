@@ -16,7 +16,7 @@
                     <span>Chat: <span class="prop-style infx--chat-status infx--chat-offline" id="infx--chat-status">Offline</span></span>
                 </div>
                 <div class="contact-link section-style" >
-                    <span class="link-style infx--open-chat" id="infx--open-chat">{s namespace='frontend/index/index' name='contactProperty'}Sprechen Sie Uns an{/s}</span>
+                    <span class="link-style infx--open-chat is--underline" id="infx--open-chat">{s namespace='frontend/index/index' name='contactProperty'}Sprechen Sie Uns an{/s}</span>
                 </div>
             </div>
             <div class="number-property prop-container">
