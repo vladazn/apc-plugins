@@ -1,0 +1,12 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="infx_exit_popup.subscriber.checkout_subscriber" class="InfxExitPopup\Subscriber\IndexSubscriber">
+            <argument>%infx_exit_popup.plugin_dir%</argument>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+        <service id="infx_exit_popup.newsletter_component" class="InfxExitPopup\Components\NewsletterComponent"/>
+    </services>
+</container>
