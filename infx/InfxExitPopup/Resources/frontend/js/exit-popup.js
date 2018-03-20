@@ -1,4 +1,4 @@
-;(function ($,window,document) {
+    ;(function ($,window,document) {
 
     var exitPopup = {
 
@@ -30,7 +30,10 @@
 			var me = this;
 
 			$.modal.open($(me.modalcontent).html(),{
-                title: $(me.modaltitle).text()
+                title: $(me.modaltitle).text(),
+                showCloseButton: false,
+                additionalClass: 'infx--modalbox',
+                sizing: 'content',
             });
 			me.unbindTracking();
 		},
