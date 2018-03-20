@@ -59,7 +59,7 @@ class InfxExitPopup extends Plugin
 	        "fromName" => "{config name=shopName}",
 	        "fromMail" => "{config name=mail}",
 	        "subject" => 'Your voucher at {config name=shopName}',
-	        "content" => '\r\n\r\nHello,\r\n\r\nThank you for your order. You can use the following Voucher Code: {$voucher} ',
+	        "content" => 'Hello,Thank you for your order. You can use the following Voucher Code: {$voucher} ',
 	        "isHtml" => false,
 	        "attachment" => "",
 	        "type" => "",
