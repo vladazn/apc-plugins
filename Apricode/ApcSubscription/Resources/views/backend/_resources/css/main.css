@@ -1,0 +1,42 @@
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    display: inline;
+    padding: 0; 
+    margin-left: 0;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: white !important; 
+    border: 1px solid #fff;
+}
+
+.row{
+    margin: 0 !important;
+}
+
+thead>tr>th{
+    word-break: break-word;
+}
+
+tbody>tr>td>a{
+    float: left !important;
+    width: 33% !important;
+    padding: 0 !important;
+}
+
+body table.dataTable thead th, table.dataTable thead td {
+    padding: 10px 8px;
+}
+
+.infx_voucher_remove, .infx_voucher_code_delete {
+    color: #d82626;
+}
+
+.infx_voucher_edit span  {
+    color: #ea7c06 !important;
+}
+
+.infx_code_balance_edit .glyphicon-pencil {
+    display: inline-block;
+    color: #ea7c06 !important;
+    padding-left: 10px;
+}
