@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.3/engine/Shopware/Components/Plugin/schema/config.xsd">
+    <elements>
+        <element required="true" type="text">
+            <name>apc_reserve_time</name>
+            <label>Reservation Time</label>
+            <value>15</value>
+        </element>
+    </elements>
+</config>
