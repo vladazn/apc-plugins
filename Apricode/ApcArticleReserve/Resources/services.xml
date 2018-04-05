@@ -1,0 +1,17 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="apc_article_reserve.subscriber.basket_subscriber" class="ApcArticleReserve\Subscriber\BasketSubscriber">
+            <argument>%apc_article_reserve.plugin_dir%</argument>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+        <service id='apc_article_reserve.reservation_component' class="ApcArticleReserve\Components\ReservationComponent">
+            <argument>%apc_article_reserve.plugin_name%</argument>
+            <argument>%apc_article_reserve.plugin_dir%</argument>
+            <argument type="service" id="shopware.plugin.cached_config_reader"/>
+        </service>
+
+    </services>
+</container>
