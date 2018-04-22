@@ -1,0 +1,17 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="apc_route_delivery.zip_component" class="ApcRouteDelivery\Components\ZipComponent">
+            <argument>%apc_route_delivery.plugin_dir%</argument>
+            <argument>%apc_route_delivery.plugin_name%</argument>
+            <argument type="service" id="shopware.plugin.cached_config_reader"/>
+        </service>
+        <service id="apc_route_delivery.subscriber.apc_subscriber" class="ApcRouteDelivery\Subscriber\ApcSubscriber">
+            <argument>%apc_route_delivery.plugin_dir%</argument>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+    </services>
+
+</container>

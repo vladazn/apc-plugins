@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.3/engine/Shopware/Components/Plugin/schema/config.xsd">
+    <elements>
+        <element required="true" type="text">
+            <name>apc_route_page</name>
+            <label>Custom Page Id</label>
+        </element>
+        <element required="true" type="text">
+            <name>apc_route_reminder_template</name>
+            <label>Reminder Email Template</label>
+        </element>
+        <element required="true" type="mediaselection">
+            <name>apc_route_area</name>
+            <label>Area of the Delivery</label>
+        </element>
+    </elements>
+</config>
