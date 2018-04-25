@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.3/engine/Shopware/Components/Plugin/schema/plugin.xsd">
+    <label lang="en">Variant Colors</label>
+    <label lang="de">FarbVarianten</label>
+    <version>1.0.0</version>
+    <supplier>Apricode</supplier>
+    <support>contact@apricode.am</support>
+    <link>http://apricode.am/</link>
+    <description>Preview available colors in the listing page and emotion elements</description>
+    <copyright>Copyright © 2018, Apricode.</copyright>
+    <author>Apricode</author>
+    <compatibility minVersion="5.0.0"/>
+</plugin>
