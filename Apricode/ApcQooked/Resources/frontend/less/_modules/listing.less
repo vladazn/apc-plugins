@@ -1,0 +1,129 @@
+.box--list{
+    .product--info{
+        &.no--image{
+            padding: 0;
+        }
+        .weekdays{
+            font-weight: 900;
+            font-size: 16px;
+            color: #000000;
+        }
+        .product--title{
+            padding-top: 15px;
+            margin-bottom: 10px;
+            height: auto;
+        }
+        .apc--subtitle{
+            margin-bottom: 10px;
+        }
+        .product--btn-container{
+            .product--price-info{
+                max-width: 280px;
+                margin-left: auto;
+                text-align: left;
+            }
+            .buybox--form{
+                margin-left: auto;
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.product--box{
+    .product--price{
+        .price--default{
+            font-weight: 300;
+        }
+    }
+    .product--description{
+        height: 55px;
+    }
+}
+
+@media screen and (min-width: 48em)
+{
+    .filter--facet-container{
+        display: block !important;
+    }
+}
+.filter--close-btn{
+    display: none !important;
+}
+#filter{
+    background-color: white;
+}
+.listing--actions{
+    border: 0;
+    padding: 0;
+    .filter--facet-container{
+        padding: 0;
+    }
+    .action--filter-options {
+        border: 0;
+        .filter--container{
+            margin: 0;
+            padding: 0;
+            .filter--facet-container{
+                display: block;
+            }
+        }
+    }
+    .filter-panel{
+        width: 100%;
+        border: 0;
+        margin-left: 0;
+        &:hover{
+            border: 0;
+        }
+        .filter-panel--content{
+          padding-top: 0;
+        }
+        .filter-panel--option-list{
+            display: flex;
+            .filter-panel--option{
+                .filter-panel--label{
+                    input[type=checkbox]:checked~span{
+                        color: @brand-primary;
+                    }
+                }
+
+                width: 33.33333%;
+                text-align: center;;
+                input[type="checkbox"]{
+                    position: absolute;
+                    right: 10000%;
+                }
+                .filter-panel--label{
+                    border-left: 1px solid #dadae5;
+                    padding: 0;
+                    font-size: 1.5rem;
+                    line-height: 50px;
+                    &.is--first{
+                        border: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 48rem){
+  .filter-panel{
+      margin-bottom: 20px;
+  }
+}
+@media screen and (min-width: 30em){
+    .box--list{
+        .product--info{
+            padding: 0px 0px 0px 300px;
+        }
+        .product--image{
+            width: 280px;
+            .image--element{
+                img{
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
