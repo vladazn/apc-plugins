@@ -11,6 +11,31 @@ class ApcSubscriber implements SubscriberInterface
     private $pluginDir = null;
     private $component = null;
 
+    private $weeks = [
+        1 => 'Montag',
+        2 => 'Dienstag',
+        3 => 'Mittwoch',
+        4 => 'Donnerstag',
+        5 => 'Freitag',
+        6 => 'Samstag',
+        7 => 'Sonntag'
+    ];
+
+    private $months = [
+        1 => 'Januar',
+        2 => 'Februar',
+        3 => 'März',
+        4 => 'April',
+        5 => 'Mai',
+        6 => 'Juni',
+        7 => 'Juli',
+        8 => 'August',
+        9 => 'September',
+        10 => 'Oktober',
+        11 => 'November',
+        12 => 'Dezember'
+    ];
+
     public function __construct($pluginBaseDirectory){
         $this->component = Shopware()->Container()->get('apc_route_delivery.zip_component');
         $this->pluginDir = $pluginBaseDirectory;
@@ -24,7 +49,8 @@ class ApcSubscriber implements SubscriberInterface
             'sOrder::sSaveOrder::after' => 'onSaveOrder',
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Checkout' => 'onCheckoutFinish',
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Account' => 'onOpenOrders',
-            'Shopware_CronJob_RouteDailyCheck' => 'onRouteCheck'
+            'Shopware_CronJob_RouteDailyCheck' => 'onRouteCheck',
+            'Shopware_Modules_Order_SendMail_Filter' => 'onOrderMailSend'
         ];
     }
 
@@ -40,6 +66,28 @@ class ApcSubscriber implements SubscriberInterface
             return;
         }
         $this->component->assignOrder($orderNumber);
+
+    }
+
+    public function onOrderMailSend(\Enlight_Event_EventArgs $args){
+        // $mail = $args->getReturn();
+        $subject = $args->get('subject');
+        $context = $args->get('context');
+        $context['weeks'] = $this->weeks;
+        $context['months'] = $this->months;
+        $sql = 'SELECT `apc_routes`.`new_date` FROM `apc_routes`
+                LEFT JOIN `apc_routes_zip` ON `apc_routes_zip`.`route_id` = `apc_routes`.`id`
+                WHERE `apc_routes_zip`.`zip` = ? ORDER BY `new_date` ASC;
+        ;';
+        $context['apcDeliveryDate'] = Shopware()->Db()->fetchOne($sql,$context['shippingaddress']['zipcode']);
+        try{
+
+            $mail = Shopware()->TemplateMail()->createMail('sORDER', $context);
+            $mail->addTo($subject->sUserData['additional']['user']['email']);
+        }catch(\Exception $e){
+            var_dump($e->getMessage());exit;
+        }
+        return $mail;
 
     }
 
@@ -59,13 +107,17 @@ class ApcSubscriber implements SubscriberInterface
                     WHERE `s_order`.`ordernumber` = ?
             ;';
             $view->apcDeliveryDate = Shopware()->Db()->fetchOne($sql,$orderNumber);
-        }elseif(strtolower($actionName) == 'shippingpayment'){
+        }elseif(strtolower($actionName) == 'shippingpayment' || strtolower($actionName) == 'confirm'){
             $view = $controller->View();
             $userData = $view->sUserData;
-
+            $key = $request->getParam('debug');
+            if($key){
+                $this->component->sendTestOrderMail();
+                // var_dump($userData);exit;
+            }
             $sql = 'SELECT `apc_routes`.`new_date` FROM `apc_routes`
                     LEFT JOIN `apc_routes_zip` ON `apc_routes_zip`.`route_id` = `apc_routes`.`id`
-                    WHERE `apc_routes_zip`.`zip` = ?
+                    WHERE `apc_routes_zip`.`zip` = ? ORDER BY `new_date` ASC;
             ;';
             $view->apcDeliveryDate = Shopware()->Db()->fetchOne($sql,$userData['shippingaddress']['zipcode']);
         }

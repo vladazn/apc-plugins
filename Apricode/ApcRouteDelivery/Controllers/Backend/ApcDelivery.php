@@ -53,12 +53,11 @@ class Shopware_Controllers_Backend_ApcDelivery extends Enlight_Controller_Action
     public function ordersAction() {
         $routeId = $this->Request()->getParam('routeId');
 
-        $orders = $this->component->getRouteOrders($routeId);
-
-        foreach($orders as $order){
-            $total[$order['product']] += (int)$order['quantity'];
-        }
-        $this->View()->assign('orders',$orders);
+        list($orders, $total) = $this->component->getRouteOrders($routeId);
+        $sql = 'SELECT `name`, `new_date` AS `date` FROM `apc_routes` WHERE `id` = ?;';
+        $routeInfo = $this->db->fetchRow($sql,$routeId);
+        Shopware()->Template()->assign('route', $routeInfo);
+        $this->View()->assign('finalOrders',$orders);
         $this->View()->assign('totals',$total);
     }
 

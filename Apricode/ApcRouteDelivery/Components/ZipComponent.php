@@ -8,7 +8,9 @@ class ZipComponent
     private $pluginDir = null;
     private $db = null;
     private $customPageId = null;
-    private $reminderEmailTpl = null;
+    private $reminderMailTemplate = null;
+    private $mapsApi = null;
+    private $areaImg = null;
 
     private $weeks = [
         1 => 'Montag',
@@ -44,6 +46,7 @@ class ZipComponent
         $this->customPageId = $config['apc_route_page'];
         $this->reminderMailTemplate = $config['apc_route_reminder_template'];
         $this->areaImg = $config['apc_route_area'];
+        $this->mapsApi = $config['apc_google_maps_api'];
 
     }
     public function addZipCodes(){
@@ -71,8 +74,10 @@ class ZipComponent
     }
 
     public function cronFunction(){
+        $this->sendOrderMail();
         $this->updateDeliveryDates();
         $this->checkReminder();
+        $this->updateCustomPage();
     }
 
     public function prepareZipList($routeId = null){
@@ -96,12 +101,16 @@ class ZipComponent
 
     public function assignOrder($orderNumber){
 
-        $sql = 'SELECT `apc_routes`.`new_date`, `apc_routes`.`id`  FROM `s_order_shippingaddress`, `s_order`, `apc_routes`, `apc_routes_zip`
-                WHERE `s_order_shippingaddress`.`orderID` = `s_order`.`id`
-                AND `apc_routes`.`id` = `apc_routes_zip`.`route_id`
-                AND `apc_routes_zip`.`zip` = `s_order_shippingaddress`.`zipcode`
-                AND `apc_routes`.`active` = 1
+        $sql = 'SELECT `apc_routes`.`new_date`, `apc_routes`.`id`  FROM `apc_routes`
+                LEFT JOIN `apc_routes_zip`
+                ON `apc_routes`.`id` = `apc_routes_zip`.`route_id`
+                LEFT JOIN `s_order_shippingaddress`
+                ON `apc_routes_zip`.`zip` = `s_order_shippingaddress`.`zipcode`
+                LEFT JOIN `s_order`
+                ON `s_order_shippingaddress`.`orderID` = `s_order`.`id`
+                WHERE `apc_routes`.`active` = 1
                 AND `s_order`.`ordernumber` = ? AND `s_order`.`ordernumber`<> 0
+                ORDER BY `apc_routes`.`new_date` ASC
         ;';
 
         $deliveryInfo = $this->db->fetchRow($sql,$orderNumber);
@@ -172,11 +181,10 @@ class ZipComponent
     }
 
     public function updateCustomPage(){
-        $sql = 'SELECT `apc_routes_dates`.`date`, `apc_routes`.`name` FROM `apc_routes`,`apc_routes_dates`
-                WHERE `apc_routes_dates`.`route_id` = `apc_routes`.`id`
-                AND `apc_routes`.`active` = 1 ORDER BY `apc_routes_dates`.`date` ASC;';
-        $deliveries = Shopware()->Db()->fetchAll($sql);
-
+        $sql = 'SELECT `apc_routes_dates`.`date`, `apc_routes`.`name`, `apc_routes`.`id` FROM `apc_routes`
+                LEFT JOIN `apc_routes_dates` ON `apc_routes_dates`.`route_id` = `apc_routes`.`id`
+                WHERE `apc_routes`.`active` = 1 AND `apc_routes_dates`.`date` IS NOT NULL ORDER BY `apc_routes_dates`.`date` ASC;';
+        $deliveries = $this->db->fetchAll($sql);
         $template = Shopware()->Template();
         $template = $template->createTemplate($this->pluginDir.'/Resources/views/frontend/custom/table.tpl');
         $template->assign('deliveries', $deliveries);
@@ -198,12 +206,15 @@ class ZipComponent
                 `s_order_shippingaddress`.`lastname`,
                 `s_order_shippingaddress`.`street`,
                 `s_order_shippingaddress`.`zipcode`,
-                `s_order_shippingaddress`.`city`
-                FROM `s_order`,`s_order_attributes`,`s_order_details`,`s_order_shippingaddress`
-                WHERE `s_order_attributes`.`orderID` = `s_order`.`id`
-                AND `s_order_details`.`orderID` = `s_order`.`id`
-                AND `s_order_shippingaddress`.`orderID` = `s_order`.`id`
-                AND `s_order_attributes`.`apc_delivery_route` = ?
+                `s_order_shippingaddress`.`city`,
+                `s_core_paymentmeans`.`description` AS `payment`
+                FROM `s_order`
+                LEFT JOIN `s_order_attributes` ON `s_order_attributes`.`orderID` = `s_order`.`id`
+                LEFT JOIN `s_order_details` ON `s_order_details`.`orderID` = `s_order`.`id`
+                LEFT JOIN `s_order_shippingaddress` ON `s_order_shippingaddress`.`orderID` = `s_order`.`id`
+                LEFT JOIN `s_core_paymentmeans` ON `s_core_paymentmeans`.`id` = `s_order`.`paymentID`
+                WHERE `s_order_attributes`.`apc_delivery_route` = ?
+
                 ';
         $params[] = $routeId;
         $lastDelivery = Shopware()->Db()->fetchOne('SELECT `old_date` FROM `apc_routes` WHERE `id` = ?',$routeId);
@@ -211,8 +222,14 @@ class ZipComponent
             $sql .= 'AND `s_order`.`ordertime` > ? ';
             $params[] = $lastDelivery;
         }
+        $sql .= 'ORDER BY `ordernumber` DESC ;';
         $orders = $this->db->fetchAll($sql,$params);
-        return $orders;
+        $finalOrders = [];
+        foreach($orders as $order){
+            $finalOrders[$order['payment']][] = $order;
+            $total[$order['product']] += (int)$order['quantity'];
+        }
+        return [$finalOrders,$total];
     }
 
     private function checkReminder(){
@@ -235,12 +252,198 @@ class ZipComponent
     }
 
     private function updateDeliveryDates(){
-        $this->db->query('UPDATE `apc_routes` SET `old_date` = `new_date` WHERE `new_date` < NOW() ;');
-        $routes = $this->db->fetchCol('SELECT `id` FROM `apc_routes` WHERE `new_date` < NOW();');
-        $sql = 'UPDATE `apc_routes` SET `new_date` = (SELECT `date` FROM `apc_routes_dates` WHERE `route_id` = ? LIMIT 1, 1);';
+        $this->db->query('UPDATE `apc_routes` SET `old_date` = `new_date` WHERE `new_date` <= NOW() ;');
+        $routes = $this->db->fetchCol('SELECT `id` FROM `apc_routes` WHERE `new_date` <= NOW();');
+        $sql = 'UPDATE `apc_routes` SET `new_date` = (SELECT `date` FROM `apc_routes_dates` WHERE `route_id` = ? LIMIT 1, 1) WHERE `id` = ?;';
         $sql .= 'DELETE FROM `apc_routes_dates` WHERE `route_id` = ? LIMIT 1 ;';
         foreach($routes as $id){
-            $this->db->query($sql,[$id,$id]);
+            $this->db->query($sql,[$id,$id,$id]);
         }
     }
+    private function sendOrderMail(){
+        $routeIds = $this->db->fetchCol('SELECT `id` FROM `apc_routes` WHERE `new_date` = ?;', date('Y-m-d'));
+        if(empty($routeIds)){
+            return;
+        }
+        foreach($routeIds as $routeId){
+            $orders = [];
+            list($orders,$total) = $this->getRouteOrders($routeId);
+            $invoices = $this->generateInvoices($orders);
+
+            $mail = Shopware()->TemplateMail()->createMail('sORDERLIST');
+            $mail->addTo(Shopware()->Config()->get('mail'));
+            $mail->addTo('fritz@arne-klett.de');
+
+            Shopware()->Template()->addTemplateDir(__DIR__ . '/../Resources/views/');;
+            Shopware()->Template()->assign('finalOrders', $orders);
+            Shopware()->Template()->assign('totals', $total);
+            $sql = 'SELECT `name`, `new_date` AS `date` FROM `apc_routes` WHERE `id` = ?;';
+            $routeInfo = $this->db->fetchRow($sql,$routeId);
+            Shopware()->Template()->assign('route', $routeInfo);
+
+            $data = Shopware()->Template()->fetch('backend/apc_delivery/mailorders.tpl');
+            try{
+                $mpdf = new \mPDF('utf-8', 'A4', '', '');
+                $mpdf->WriteHTML($data);
+                $pdfFileContent = $mpdf->Output('', 'S');
+            }catch(\Exception $e){
+            }
+
+            $mail->createAttachment(
+                $pdfFileContent,
+                'application/pdf',
+                \Zend_Mime::DISPOSITION_ATTACHMENT,
+                \Zend_Mime::ENCODING_BASE64,
+                'orders.pdf'
+            );
+            if($invoices){
+                $mail->createAttachment(
+                    $invoices,
+                    'application/pdf',
+                    \Zend_Mime::DISPOSITION_ATTACHMENT,
+                    \Zend_Mime::ENCODING_BASE64,
+                    'invoices_'.date('Y-m-d').'.pdf'
+                );
+            }
+
+            try {
+                $result = $mail->send();
+            } catch (\Exception $e) {
+            }
+        }
+
+    }
+
+    // public function sendTestOrderMail(){
+    //     $routeIds = $this->db->fetchCol('SELECT `id` FROM `apc_routes` WHERE `new_date` = ?;', date('Y-m-d', strtotime('+1 day')));
+    //     if(empty($routeIds)){
+    //         return;
+    //     }
+    //     foreach($routeIds as $routeId){
+    //         $orders = [];
+    //         list($orders,$total) = $this->getRouteOrders($routeId);
+    //         $invoices = $this->generateInvoices($orders);
+    //         $mail = Shopware()->TemplateMail()->createMail('sORDERLIST');
+    //         // $mail->addTo(Shopware()->Config()->get('mail'));
+    //         $mail->addTo('vladimir.aznauryan@gmail.com');
+    //
+    //         Shopware()->Template()->addTemplateDir(__DIR__ . '/../Resources/views/');;
+    //         Shopware()->Template()->assign('finalOrders', $orders);
+    //         Shopware()->Template()->assign('totals', $total);
+    //         $sql = 'SELECT `name`, `new_date` AS `date` FROM `apc_routes` WHERE `id` = ?;';
+    //         $routeInfo = $this->db->fetchRow($sql,$routeId);
+    //         Shopware()->Template()->assign('route', $routeInfo);
+    //
+    //         $data = Shopware()->Template()->fetch('backend/apc_delivery/mailorders.tpl');
+    //
+    //         $mpdf = new \mPDF('utf-8', 'A4', '', '');
+    //         $mpdf->WriteHTML($data);
+    //         $pdfFileContent = $mpdf->Output('', 'S');
+    //
+    //
+    //         $mail->createAttachment(
+    //             $pdfFileContent,
+    //             'application/pdf',
+    //             \Zend_Mime::DISPOSITION_ATTACHMENT,
+    //             \Zend_Mime::ENCODING_BASE64,
+    //             'orders_'.date('Y-m-d').'.pdf'
+    //         );
+    //         if($invoices){
+    //             $mail->createAttachment(
+    //                 $invoices,
+    //                 'application/pdf',
+    //                 \Zend_Mime::DISPOSITION_ATTACHMENT,
+    //                 \Zend_Mime::ENCODING_BASE64,
+    //                 'invoices_'.date('Y-m-d').'.pdf'
+    //             );
+    //         }
+    //
+    //         try {
+    //             $result = $mail->send();
+    //         } catch (\Exception $e) {
+    //         }
+    //     }
+    //
+    // }
+
+    private function generateInvoices($orders){
+        foreach($orders as $paymentmethod){
+            foreach($paymentmethod as $order){
+                if(in_array($order['ordernumber'],$done)){
+                    continue;
+                }
+                $this->generateSingleInvoice($order['ordernumber']);
+                $done[] = $order['ordernumber'];
+            }
+        }
+
+        $sql = 'SELECT `s_order_documents`.`hash` FROM `s_order_documents`
+                    LEFT JOIN `s_order` ON `s_order`.`id` = `s_order_documents`.`orderID`
+                    WHERE `s_order`.`ordernumber` IN ('.str_repeat("?,",count($done) - 1).'?)';
+        $invoices = $data = Shopware()->Db()->fetchCol($sql,$done);
+        if(empty($invoices)){
+            return false;
+        }
+        foreach($invoices as &$invoice){
+            $invoice = $_SERVER['DOCUMENT_ROOT'].'files/documents/'.$invoice.'.pdf';
+        }
+        $invoicesDocument = $this->mergeInvoices($invoices);
+
+        return $invoicesDocument;
+    }
+
+    private function generateSingleInvoice($ordernumber){
+        $sql = 'SELECT `id` FROM `s_order` WHERE `ordernumber` = ?;';
+        $orderID = $this->db->fetchOne($sql,$ordernumber);
+        $currentDate = date("d.m.Y");
+		$orderIdentifier = (int)$orderID;
+
+		$document = \Shopware_Components_Document::initDocument(
+			$orderIdentifier,
+			1,
+			[
+				'date'                    => $currentDate,
+				'delivery_date'           => $currentDate,
+				'shippingCostsAsPosition' => false,
+				'_renderer'               => "pdf",
+			]
+		);
+
+		$document->render();
+    }
+
+    public function mergeInvoices($filenames)
+    {
+        if ($filenames) {
+            $filesTotal = sizeof($filenames);
+            $fileNumber = 1;
+            $mpdf = new \mPDF('utf-8', 'A4', '', '');
+
+            $mpdf->SetImportUse();
+
+            if (!file_exists($outFile)) {
+                $handle = fopen($outFile, 'w');
+                fclose($handle);
+            }
+
+            foreach ($filenames as $fileName) {
+                if (file_exists($fileName)) {
+                    $pagesInFile = $mpdf->SetSourceFile($fileName);
+                    for ($i = 1; $i <= $pagesInFile; $i++) {
+                        $tplId = $mpdf->ImportPage($i);
+                        $mpdf->UseTemplate($tplId);
+                        if (($fileNumber < $filesTotal) || ($i != $pagesInFile)) {
+                            $mpdf->WriteHTML('<pagebreak />');
+                        }
+                    }
+                }
+                $fileNumber++;
+            }
+
+            return $mpdf->Output('', 'S');
+
+        }
+
+    }
+
 }

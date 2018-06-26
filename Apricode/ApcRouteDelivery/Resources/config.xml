@@ -14,5 +14,9 @@
             <name>apc_route_area</name>
             <label>Area of the Delivery</label>
         </element>
+        <element required="true" type="text">
+            <name>apc_google_maps_api</name>
+            <label>Area of the Delivery</label>
+        </element>
     </elements>
 </config>
