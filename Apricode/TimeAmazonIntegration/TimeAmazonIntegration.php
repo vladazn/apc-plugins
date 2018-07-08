@@ -63,6 +63,11 @@ class TimeAmazonIntegration extends Plugin
            'displayInBackend' => true,
            'custom' => true
         ]);
+        $service->update('s_articles_attributes', 'auto_shipping', 'boolean', [
+           'label' => 'Auto Shipping',
+           'displayInBackend' => true,
+           'custom' => true
+        ]);
         $service->update('s_order_attributes', 'amazon_id', 'string', [
            'label' => 'Amazon Order Number',
            'displayInBackend' => true,
@@ -77,6 +82,7 @@ class TimeAmazonIntegration extends Plugin
 
     private function removeAttributes($service){
         $service->delete('s_articles_attributes', 'seller_sku');
+        $service->delete('s_articles_attributes', 'auto_shipping');
         $service->delete('s_order_attributes', 'amazon_id');
         $service->delete('s_order_attributes', 'amazon_status_updated');
         $service->delete('s_articles_attributes', 'sync_stock');

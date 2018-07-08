@@ -146,12 +146,16 @@ class CronSubscriber implements SubscriberInterface
                     if($response['success'] == true){
                         $sql = 'INSERT INTO `s_order_attributes` SET `amazon_id` = ?, `orderID` = ?;';
                         $this->db->query($sql,[$order['AmazonOrderId'],$response['data']['id']]);
-                        $shopareOrderComponent->handleStock();
-                        $shopareOrderComponent->handleAutoShipping($response['data']['id']);
-                        $shopareOrderComponent->handleEsdArticles($response['data']['id']);
-                        $shopareOrderComponent->setPaymentStatus($response['data']['id']);
-                        $shopareOrderComponent->esdEmailNotify($response['data']['id']);
-                        $shopareOrderComponent->invoiceNotify($response['data']['id']);
+                        try{
+                            $shopareOrderComponent->handleStock();
+                            $shopareOrderComponent->handleEsdArticles($response['data']['id']);
+                            $shopareOrderComponent->invoiceNotify($response['data']['id']);
+                            $shopareOrderComponent->setPaymentStatus($response['data']['id']);
+                            $shopareOrderComponent->esdEmailNotify($response['data']['id']);
+                            $shopareOrderComponent->handleAutoShipping($response['data']['id']);
+                        }catch(\Exception $e){
+                            // var_dump($e->getMessage());exit;
+                        }
                         $k++;
                     }
                 }

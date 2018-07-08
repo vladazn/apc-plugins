@@ -33,7 +33,7 @@ class Frontend implements SubscriberInterface {
 
     public function onFront(\Enlight_Event_EventArgs $args)
     {
-        
+
         // $this->postEsd();exit;
         // Shopware()->Events()->notify('Shopware_CronJob_ApcAmazonSync');
         // Shopware()->Events()->notify('Shopware_CronJob_ApcAmazonStatusSync');
