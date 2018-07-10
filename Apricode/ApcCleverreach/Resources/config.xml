@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.3/engine/Shopware/Components/Plugin/schema/config.xsd">
+    <elements>
+        <element required="true" type="text">
+            <name>apc_clevverreach_clientid</name>
+            <label lang="de">Client ID</label>
+            <label lang="en">Client ID</label>
+        </element>
+        <element required="true" type="text">
+            <name>apc_clevverreach_clientsecret</name>
+            <label lang="de">Client Secret</label>
+            <label lang="en">Client Secret</label>
+        </element>
+        <element required="true" type="text">
+            <name>apc_clevverreach_source</name>
+            <label lang="de">Source</label>
+            <label lang="en">Source</label>
+        </element>
+        <element required="true" type="text">
+            <name>apc_clevverreach_group</name>
+            <label lang="de">Group Id</label>
+            <label lang="en">Group Id</label>
+        </element>
+        <element required="true" type="text">
+            <name>apc_clevverreach_form</name>
+            <label lang="de">Form Id</label>
+            <label lang="en">Form Id</label>
+        </element>
+
+    </elements>
+</config>

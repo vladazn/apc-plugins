@@ -1,0 +1,14 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="apc_cleverreach.subscriber.apc_subscriber" class="ApcCleverreach\Subscriber\ApcSubscriber">
+            <argument>%apc_cleverreach.plugin_dir%</argument>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+        <service id="apc_cleverreach.api" class="ApcCleverreach\Services\ApiService">
+            <argument>%apc_cleverreach.plugin_dir%</argument>
+        </service>
+    </services>
+</container>
