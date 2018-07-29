@@ -1,0 +1,93 @@
+.is--ctl-custom{
+    .page-wrap{
+        .content--breadcrumb {
+            display: none;
+        }
+        .content-main{
+            .content-main--inner{
+                .unitize(padding-top.20);
+                .content--wrapper{
+                    padding: 0 20px;
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    .wav--custom--title{
+        .emotion--html{
+            .html--title{
+                .unitize(font-size, 38);
+                .unitize(line-height, 44);
+                text-align: center;
+                font-weight: bold;
+                color: #555555;
+            }
+            .html--content{
+                display: none;
+            }
+        }
+    }
+    .wav--custom-text-element{
+        .emotion--html{
+            .html--title{
+                .unitize(font-size,27);
+                .unitize(line-height,38);
+                font-weight: bold;
+                color: #555555;
+            }
+            .html--content{
+                .unitize(padding-top, 10);
+                .table{
+                    width: 100%;
+                    .unitize(font-size,16);
+                    tr{
+                        td{
+                            width: 50%;
+                            padding: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .wav--custom-text-element-title{
+        .emotion--html{
+            .html--title{
+                .unitize(font-size, 27);
+                .unitize(line-height, 38);
+                font-weight: bold;
+                color: #555555;
+            }
+            .html--content{
+                display: none;
+            }
+        }
+    }
+    .wav--img--round{
+        img{
+            width: 80% !important;
+            .unitize(padding-top, 20);
+            .unitize(margin-left, 20);
+            border-radius: 50%;
+        }
+        .emotion--banner{
+            overflow: inherit;
+        }
+    }
+}
+
+
+@media all and (min-width: 64rem){
+    .is--ctl-custom{
+        .page-wrap{
+            .content-main{
+                .content-main--inner{
+                    .content--wrapper{
+                        padding: 0;
+                    }
+                }
+            }
+        }
+    }
+}

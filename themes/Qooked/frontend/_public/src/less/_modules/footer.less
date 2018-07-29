@@ -1,0 +1,43 @@
+.footer-main{
+    .column--headline{
+        .unitize(font-size, 14);
+        margin: 0;
+    }
+    .footer--bottom{
+        padding: 0;
+        .vat-info--text{
+            margin: 0;
+            .unitize(padding, 7);
+        }
+    }
+    .newsletter--form{
+        padding: 0;
+    }
+    .privacy-information{
+        margin-bottom: 0;
+        label{
+            .unitize(font-size, 12);
+        }
+    }
+    .newsletter--field, .newsletter--button{
+        border-radius: 0;
+        background: white;
+    }
+}
+.footer-minimal{
+    .unitize(padding, 10);
+}
+.is--minimal-header{
+    .content-main{
+        .unitize(margin-bottom, 10);
+    }
+}
+
+@media all and (min-width: 48rem){
+    .footer-main{
+        .column--headline{
+            .unitize(margin-top, 15);
+            .unitize(margin-bottom, 5);
+        }
+    }
+}

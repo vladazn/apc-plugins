@@ -1,0 +1,81 @@
+.btn{
+    border-radius: 0;
+}
+.is--primary{
+    background: @brand-primary;
+    &:hover{
+        background: @brand-primary-dark;
+    }
+}
+.ajax--cart .button--container *[class*="button--"]{
+    border-radius: 0;
+}
+
+textarea, input[type="text"], input[type="search"], input[type="password"], input[type="number"], input[type="email"], input[type="tel"]{
+    border-radius: 0;
+    background: white;
+    box-shadow: none;
+}
+
+.select-field select, .js--fancy-select select{
+    border-radius: 0;
+    background-image: none;
+}
+
+.panel--actions{
+    .btn{
+        background: white;
+    }
+}
+.btn{
+    &.choose-different-address{
+        background: white;
+    }
+}
+.product--table .column--actions .column--actions-link{
+    background: white;
+}
+
+.js--off-canvas-button{
+    border-radius: 0;
+}
+.product-slider--arrow{
+    z-index: 1500;
+}
+
+
+.last-seen-products--container{
+    .unitize(height, 200);
+    .last-seen-products-item--image{
+        padding-right: 10%;
+        height: 100%;
+        margin: 0;
+        .image--element{
+            img{
+                margin: 0;
+                height: 100%;
+                width: 100%;
+                object-fit:  cover;
+            }
+        }
+    }
+    .last-seen-products-item--title{
+        position: absolute;
+        z-index: 1000;
+        top: 0;
+        height: 100%;
+        width: 90%;
+        margin-right: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: transparent;
+        &:hover{
+            color: white;
+            background:  rgba(0,0,0,0.5);
+        }
+    }
+}
+.last-seen-products--slider .product--box .product--title{
+    .unitize-padding(0, 10);
+}

@@ -1,0 +1,30 @@
+.navigation-main{
+    border: none;
+    .navigation--list{
+        .unitize(font-size,16);
+        display: flex;
+        justify-content: center;
+        .navigation--entry{
+            &.is--active{
+                .navigation--link{
+                    font-weight: inherit;
+                    background: @nav-bg-color;
+                }
+            }
+            &.is--hovered{
+                .navigation--link{
+                    background: @nav-bg-color;
+                }
+            }
+        }
+        .navigation--link{
+            .unitize(padding,20);
+            border-radius: 0;
+        }
+    }
+    .advanced-menu {
+        .button-container{
+            background: @nav-bg-color;
+        }
+    }
+}

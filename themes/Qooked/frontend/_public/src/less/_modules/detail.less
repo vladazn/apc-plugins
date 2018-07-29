@@ -1,0 +1,264 @@
+.is--ctl-detail{
+    .content--wrapper{
+        .unitize-padding(0, 10);
+    }
+    .content-main{
+        &.container{
+            max-width: none;
+            background: white;
+            margin-bottom: 0;
+            .unitize(padding-bottom, 50);
+            .content-main--inner{
+                .unitize(margin-top, -200);
+            }
+        }
+    }
+    .content--breadcrumb{
+        width: 90%;
+        .unitize(max-width, 1260);
+        margin: 0 auto;
+        .breadcrumb--list{
+            justify-content: flex-start;
+        }
+    }
+    .content-main--inner{
+        .unitize(max-width, 1260);
+        margin: 0 auto;
+        width: 90%;
+
+    }
+}
+.detail--banner-image{
+    background-repeat: no-repeat;
+    .unitize(height, 270);
+    background-size: cover;
+    background-position: center;
+}
+
+.detail--banner-social{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    .unitize(top, -60);
+    .social--icon{
+        background: white;
+        .unitize(width, 45);
+        .unitize(height, 45);
+        .unitize(padding, 13);
+        &:hover{
+            background: #e5e5e5;
+        }
+    }
+}
+
+.product--details{
+    .product--header{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: 100%;
+        .unitize(padding-top, 15);
+        .product--info{
+            width: 100%;
+            .apc--titles{
+                display: flex;
+                flex-wrap: wrap;
+                .product--title{
+                    width: 100%;
+                }
+                .apc--subtitle{
+                    .unitize(margin-top, 10);
+                    .unitize(font-size, 16);
+                    width: 100%;
+                }
+            }
+        }
+        .apc--header-actions{
+            width: 100%;
+            .product--actions{
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                border: none;
+                .action--link{
+                    .unitize(width, 50);
+                    .unitize(height, 50);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 1px solid @brand-primary;
+                    background: white;
+                    border-radius: 50%;
+                    i{
+                        color: @brand-primary;
+                        margin: 0;
+                        .unitize(font-size, 17);
+                    }
+                    &:hover{
+                        border-color: @brand-primary-dark;
+                        background: @brand-primary-dark;
+                        i{
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .buybox--quantity{
+        .select-field{
+            .quantity--select{
+                border-radius: 0;
+                background: white;
+            }
+        }
+        width: 48%;
+        margin-right: 2%;
+    }
+    .buybox--button{
+        background: @brand-primary;
+        border-radius: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        width: 50%;
+    }
+    .buybox--form{
+        width: 100%;
+    }
+    .tab-menu--cross-selling{
+        .tab--navigation{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .unitize(margin-bottom, 15);
+            .tab--link{
+                border: 1px solid #e5e5e5;
+                border-radius: 0;
+                margin: 0;
+                border-right: none;
+                font-weight: normal;
+                &.is--active{
+                    border-bottom-color: #e5e5e5;
+                    color: white;
+                    background: @brand-primary;
+                }
+                &:hover{
+                    color: white;
+                    background: @brand-primary;
+                }
+                &:last-child{
+                    border-right: 1px solid #e5e5e5;
+                }
+            }
+        }
+        .product-slider{
+            .unitize(height, 350);
+            .product-slider--item{
+                // width: 33.33% !important;
+            }
+        }
+    }
+}
+
+
+.apc--table{
+    margin-bottom: 50px;
+    .product--properties-table{
+        .product--properties-label{
+            padding-left: 0 !important;
+            vertical-align: top;
+            width: auto !important;
+            .unitize(font-size, 14);
+        }
+        .product--properties-value{
+            width: auto !important;
+            .unitize(font-size, 14);
+        }
+        td{
+            background: #ffffff !important;
+        }
+    }
+}
+
+.product--detail-upper{
+    display: flex;
+    flex-wrap: wrap;
+    .apc--product-description{
+        width: 100%;
+        p{
+            .unitize(font-size, 14);
+        }
+    }
+    .product--buybox{
+        width: 100%;
+    }
+}
+.js--tab-menu{
+    .tab--link{
+        background: white;
+        border-radius: 0;
+    }
+}
+
+@media all and (min-width: 48rem){
+    .detail--banner-image{
+        .unitize(height, 350);
+    }
+
+    .detail--banner-social{
+        justify-content: flex-end;
+    }
+
+    .product--details{
+        .buybox--quantity{
+            width: 100%;
+            margin: 0;
+        }
+        .buybox--button{
+            width: 100%;
+        }
+        .product--header{
+            .product--info{
+                width: 50%;
+            }
+            .apc--header-actions{
+                width: 50%;
+                .product--actions{
+                    justify-content: flex-end;
+                }
+            }
+        }
+    }
+
+    .product--detail-upper{
+        .apc--product-description{
+            width: 70%;
+            .unitize(padding-right, 30);
+        }
+        .product--buybox{
+            width: 30%;
+        }
+    }
+}
+
+@media all and (min-width: 64rem){
+    .detail--banner-image{
+        .unitize(height, 550);
+    }
+    .product--details{
+        .buybox--form{
+            .buybox--quantity{
+                width: 35%;
+                margin-right: 2%;
+            }
+            .buybox--button{
+                width: 63%;
+            }
+        }
+    }
+}
