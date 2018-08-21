@@ -1,0 +1,252 @@
+.inside--the-box-content{
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    .inside--container{
+        width: 100%;
+        .unitize(max-width, 1260);
+        margin: 0 auto;
+        display:  flex;
+        justify-content:  center;
+        height:  100%;
+        .unitize-padding(20, 0);
+        .inside--info{
+            width: 100%;
+            .unitize(max-width, 500);
+            background: white;
+            .unitize(padding, 20);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            .info--title{
+                text-align: center;
+                width: 100%;
+                h2{
+                    .unitize(font-size, 34);
+                    .unitize(line-height, 40);
+                    margin-top: 0;
+                }
+            }
+            .info--list{
+                width: 95%;
+                .info--list-row{
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    .unitize(font-size, 16);
+                    .info--list-text{
+                        .unitize(margin, 10);
+                        margin-left:  0;
+                        .unitize(max-height, 40);
+                        overflow: hidden;
+                    }
+                    .info--list-icon{
+                        .unitize(padding-right, 20);
+                        color: @brand-primary;
+                    }
+                }
+                .info--btn{
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}
+
+.hompage--top-banner-content{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner--text-content{
+    z-index: 1;
+    text-align: center;
+    margin-top: -7%;
+    a{
+        border-color: @brand-primary;
+        background: @brand-primary;
+        color: white;
+        .unitize(font-size, 14);
+        text-transform: uppercase;
+        .unitize-padding(5, 20);
+        &:hover{
+            color: white;
+            border-color: #659a41;
+            background:  #659a41;
+        }
+    }
+    p {
+        .unitize(font-size, 20);
+        line-height: inherit;
+    }
+    h1 {
+        .unitize(font-size, 50);
+        line-height: inherit;
+    }
+}
+
+.homepage--flexible-plans-content{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    .banner--text-container{
+        .unitize(max-width, 500);
+        width: 100%;
+        text-align: center;
+        a{
+            border-color: @brand-primary;
+            background: @brand-primary;
+            color: white;
+            .unitize(font-size, 14);
+            text-transform: uppercase;
+            .unitize-padding(5, 20);
+            &:hover{
+                color: white;
+                border-color: #659a41;
+                background:  #659a41;
+            }
+        }
+        p {
+            .unitize(font-size, 20);
+            line-height: inherit;
+            font-weight: bold;
+        }
+        h2 {
+            margin-top: 0;
+            .unitize(font-size, 50);
+            line-height: inherit;
+        }
+    }
+}
+.homepage--newsletter-content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .homepage--newsletter-container{
+        text-align: center;
+        width: 100%;
+        .unitize(max-width, 500);
+        .footer-main{
+            border-top: none;
+        }
+        .newsletter--form{
+            display:  flex;
+            flex-wrap:  wrap;
+            .newsletter--form-input{
+                .unitize(max-width, 300);
+                margin: 0 auto;
+                width:  100%;
+            }
+            .newsletter--form-text{
+                width:  100%;
+            }
+        }
+        p {
+            .unitize(font-size, 14);
+            line-height: inherit;
+        }
+        h2 {
+            margin-top: 0;
+            .unitize(font-size, 30);
+            line-height: inherit;
+        }
+    }
+}
+
+.hompage--four-images-content{
+    h2{
+        text-align: center;
+        .unitize(font-size, 40);
+        .unitize(margin-bottom, 30);
+        .unitize(margin-top, 15);
+        line-height: initial;
+    }
+    .four--images{
+        display: flex;
+        justify-content: space-between;
+        .images-item{
+            display: flex;
+            flex-wrap: wrap;
+            .item-image{
+                .unitize(height, 145);
+                margin: 0 auto;
+                svg{
+                    height: 100%;
+                }
+            }
+            .item-text{
+                width: 100%;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.is--ctl-index {
+    &.is--act-index{
+        .column--newsletter{
+            display: none;
+        }
+    }
+}
+.emotion--product-slider{
+    .box--emotion{
+        box-shadow: 0 0 13px -1px rgba(0,0,0,0.3);
+        .product--image{
+            height: 50%;
+            .image--element img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .product--details{
+            text-align: left;
+            .unitize-padding(0, 10);
+            .product--title{
+                font-weight: bold;
+                height: auto;
+                .unitize(max-height, 40);
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width: 30em){
+
+}
+
+@media screen and (min-width: 48em)
+{
+
+}
+
+@media screen and (max-width: 48rem){
+
+}
+
+@media all and (min-width: 64rem){
+    .inside--the-box-content{
+        .inside--container{
+            justify-content: flex-end;
+        }
+    }
+    .emotion--product-slider{
+        .product-slider--item{
+            width: 25% !important;
+        }
+    }
+}

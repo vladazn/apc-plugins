@@ -2,3 +2,6 @@
 
 {block name='frontend_detail_data_delivery'}
 {/block}
+
+{block name="frontend_detail_data_price"}
+{/block}
