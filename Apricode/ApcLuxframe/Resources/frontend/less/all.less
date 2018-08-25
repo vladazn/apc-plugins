@@ -1,0 +1,115 @@
+.lighbox--container{
+    .lightbox--tab{
+        .unitize-margin(10, 0);
+
+        .lightbox--title{
+            width: 100%;
+            color: white;
+            background: lightgrey;
+            padding: 10px;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
+        }
+        .lightbox--content{
+            display: none;
+            .unitize(padding, 10);
+            .radio--content{
+                .unitize(margin-bottom, 15);
+                .variant--option{
+                    display:  flex;
+                    align-items:  center;
+                    .unitize(height, 20);
+                    .option--label{
+                        .unitize(padding-left, 5);
+                    }
+                }
+            }
+        }
+        &.is--active{
+            .lightbox--content{
+                display: block;
+            }
+            .lightbox--title{
+                background: grey;
+            }
+        }
+        i{
+            display: none;
+        }
+        &.is--completed{
+            i{
+                display: block;
+            }
+            .lightbox--title{
+                background: #1ea309;
+            }
+        }
+        .text--content{
+            label{
+                width: 100%;
+                .unitize(height, 25);
+                .unitize(margin-top, 10);
+                display: flex;
+                align-items: flex-start;
+            }
+            p{
+                margin-bottom: 0;
+                .unitize(margin-top, 10);
+            }
+        }
+    }
+}
+.niceselect--container{
+    .unitize(height, 40);
+}
+.nice--select-field{
+    overflow: initial !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .nice-select{
+        border-color: transparent !important;
+        box-shadow: 0px 0px 9px 1px rgba(0,0,0,0.15);
+        .unitize(padding-left, 10);
+//        margin-bottom: 20px;
+        width: 100%;
+        .list{
+            .unitize(margin-top, 2);
+            border-radius: 0;
+        }
+    }
+}
+
+.nice-select {
+    z-index: 100;
+    .current {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding-right: 10px;
+        .option--text{
+            .unitize(padding-left, 12);
+        }
+        .option--color {
+            height: 30px;
+            width: 30px;
+        }
+    }
+    .list {
+        width: 100%;
+        .option {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-right: 10px;
+            .option--text{
+                .unitize(padding-left, 12);
+            }
+            .option--color {
+                height: 30px;
+                width: 30px;
+            }
+        }
+    }
+}
